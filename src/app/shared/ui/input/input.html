@@ -1,0 +1,34 @@
+<div class="form-field">
+
+    @if(label()){
+
+    <label [for]="id()">
+
+        {{label()}}
+
+    </label>
+
+    }
+
+    <div class="input-wrapper">
+
+        <ng-content select="[startIcon]"></ng-content>
+
+        <input [id]="id()" [type]="type()" [value]="value()" [placeholder]="placeholder()" [disabled]="disabled()"
+            [required]="required()" [autocomplete]="autocomplete()" (input)="onInput($event)">
+
+        <ng-content select="[endIcon]"></ng-content>
+
+    </div>
+
+    @if(error()){
+
+    <small>
+
+        {{error()}}
+
+    </small>
+
+    }
+
+</div>

@@ -1,2 +1,32 @@
-<p>login works!</p>
-<img src="/images/Logomark.png" alt="lofo">
+<section class="login">
+    <div class="content-login">
+        <img src="/images/Logomark.png" alt="logo">
+        <h1>Log in to your account</h1>
+        <p>Welcome back! Please enter your details.</p>
+    </div>
+
+    <form (ngSubmit)="login()">
+        <div>
+            <app-input id="username" label="username" placeholder="Enter your name" [(value)]="username">
+            </app-input>
+
+        </div>
+        <div>
+            <app-input id="password" type="password" label="Password" placeholder="Enter your password"
+                [(value)]="password">
+            </app-input>
+        </div>
+
+        <app-button type="submit">
+            Sign in
+        </app-button>
+
+
+        @if (errorMessage()) {
+        <p class="error-message">
+            {{ errorMessage() }}
+        </p>
+        }
+
+    </form>
+</section>

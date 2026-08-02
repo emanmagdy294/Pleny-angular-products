@@ -25,15 +25,13 @@
             <div class="container">
                 <div class="right-section">
 
-                    <div class="search">
 
-                        <img src="/images/search.png" alt="search">
+                    <app-input placeholder="Search">
+                        <img startIcon src="/images/search.png" alt="Search">
+                    </app-input>
 
-                        <input type="text" placeholder="Search">
 
-                    </div>
-
-                    <button class="cart-btn"  (click)="closeMenu()">
+                    <button class="cart-btn" (click)="closeMenu()">
 
                         <img src="/images/cart.png" alt="cart">
 
@@ -41,7 +39,7 @@
 
                     </button>
 
-                    <a class="home-link" routerLink=""  (click)="closeMenu()" >
+                    <a class="home-link" routerLink="" (click)="closeMenu()">
                         Account
                     </a>
                 </div>

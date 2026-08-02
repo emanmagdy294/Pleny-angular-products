@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { InputComponent } from '../../shared/ui/input/input';
 interface NavLink {
   label: string;
   route: string;
@@ -7,7 +8,7 @@ interface NavLink {
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink,InputComponent],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })

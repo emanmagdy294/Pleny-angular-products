@@ -1,0 +1,28 @@
+.login {
+    margin: auto;
+    padding-block: 60px;
+    width: 360px;
+
+    h1 {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    p {
+        line-height: 24px;
+        font-weight: 400;
+        font-size: 16px;
+        color: var(--color-text-secondary);
+    }
+}
+
+.content-login {
+    text-align: center;
+}
+
+.error-message {
+    margin-top: 1rem;
+    color: #dc2626 !important;
+    text-align: center;
+    font-size: .9rem;
+}
