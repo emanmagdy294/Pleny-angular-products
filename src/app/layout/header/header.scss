@@ -1,0 +1,147 @@
+.common-flex {
+    display: flex;
+    align-items: center;
+}
+
+.common-style {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color .2s;
+}
+
+.header {
+    height: 72px;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+}
+
+.left-section {
+    gap: 2rem;
+    @extend .common-flex;
+}
+
+.home-link {
+    @extend .common-style;
+
+    &:hover {
+        color: var(--color-primary);
+    }
+}
+
+.container {
+    justify-content: space-between;
+    max-width: 1280px;
+    margin-inline: auto;
+    height: 100%;
+    padding-inline: 24px;
+    position: relative;
+    @extend .common-flex;
+}
+
+.nav {
+    gap: 48px;
+
+    a {
+        font-size: 14px;
+        @extend .common-style;
+
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+
+    @extend .common-flex;
+}
+
+.menu-btn {
+    display: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.right-section {
+    gap: 24px;
+    flex-wrap: wrap;
+    @extend .common-flex;
+}
+
+.search {
+    width: 319;
+    height: 32px;
+    gap: 8px;
+    padding-inline: 12px;
+    border: 0.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    @extend .common-flex;
+
+    input {
+        width: 100%;
+        border: none;
+        outline: none;
+        color: rgba(153, 153, 153, 1);
+        background: transparent;
+        font-size: 14px;
+    }
+
+}
+
+.cart-btn {
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    @extend .common-flex;
+}
+
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -2px;
+    width: 14px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-bg);
+    font-size: 10px;
+    justify-content: center;
+    @extend .common-flex;
+}
+
+@media (max-width:768px) {
+
+    .menu-btn {
+        display: block;
+    }
+
+    .nav {
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        background: rgb(230, 228, 228);
+        border-radius: 8px;
+        border-bottom: 1px solid var(--color-border);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .3s ease;
+
+        a {
+
+            width: 100%;
+            padding: 18px 24px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        &.open {
+            max-height: 300px;
+        }
+
+    }
+
+}

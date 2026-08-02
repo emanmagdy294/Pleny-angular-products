@@ -1,0 +1,58 @@
+<header class="header">
+    <div class="container">
+
+        <div class="left-section">
+
+            <a class="logo" routerLink="/products">
+                <img src="/images/Logomark.png" alt="ClickTik Logo">
+                <span>ClickTik</span>
+            </a>
+
+            <a class="home-link" routerLink="/products">
+                Home
+            </a>
+
+        </div>
+
+        <nav class="nav" [class.open]="menuOpen()">
+            @for (link of links; track link.route) {
+            <a [routerLink]="link.route" (click)="closeMenu()">
+                {{ link.label }}
+            </a>
+            }
+
+
+            <div class="container">
+                <div class="right-section">
+
+                    <div class="search">
+
+                        <img src="/images/search.png" alt="search">
+
+                        <input type="text" placeholder="Search">
+
+                    </div>
+
+                    <button class="cart-btn"  (click)="closeMenu()">
+
+                        <img src="/images/cart.png" alt="cart">
+
+                        <span class="badge">3</span>
+
+                    </button>
+
+                    <a class="home-link" routerLink=""  (click)="closeMenu()" >
+                        Account
+                    </a>
+                </div>
+
+            </div>
+
+        </nav>
+
+        <button type="button" class="menu-btn" (click)="toggleMenu()" aria-label="Toggle menu">
+            ☰
+        </button>
+
+    </div>
+</header>
