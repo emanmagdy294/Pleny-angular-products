@@ -1,27 +1,22 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { InputComponent } from '../../shared/ui/input/input';
-interface NavLink {
-  label: string;
-  route: string;
-}
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink,InputComponent],
+  imports: [RouterLink, InputComponent],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
 export class Header {
   readonly menuOpen = signal(false);
 
-  readonly links: NavLink[] = [
+  private readonly authService = inject(AuthService);
 
-    {
-      label: 'Log in',
-      route: '/login',
-    },
-  ];
+  private readonly router = inject(Router);
+
+  readonly isLoggedIn = this.authService.isLoggedIn;
 
   toggleMenu(): void {
     this.menuOpen.update((value) => !value);
@@ -29,5 +24,11 @@ export class Header {
 
   closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  logout(): void {
+    this.authService.logout();
+
+    this.router.navigate(['/login']);
   }
 }

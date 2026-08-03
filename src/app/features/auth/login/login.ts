@@ -34,6 +34,7 @@ export class Login {
           this.errorMessage.set('');
           localStorage.setItem('accessToken', response.accessToken);
           localStorage.setItem('refreshToken', response.refreshToken);
+          this.authService.isLoggedIn.set(true);
           this.router.navigate(['/products']);
         },
 

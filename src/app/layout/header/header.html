@@ -7,43 +7,38 @@
                 <img src="/images/Logomark.png" alt="ClickTik Logo">
                 <span>ClickTik</span>
             </a>
-
+            @if (isLoggedIn()) {
             <a class="home-link" routerLink="/products">
-                Home
+                Products
             </a>
-
+            }
         </div>
 
         <nav class="nav" [class.open]="menuOpen()">
-            @for (link of links; track link.route) {
-            <a [routerLink]="link.route" (click)="closeMenu()">
-                {{ link.label }}
-            </a>
-            }
-
 
             <div class="container">
+                @if (isLoggedIn()) {
                 <div class="right-section">
-
 
                     <app-input placeholder="Search">
                         <img startIcon src="/images/search.png" alt="Search">
                     </app-input>
 
-
                     <button class="cart-btn" (click)="closeMenu()">
-
                         <img src="/images/cart.png" alt="cart">
-
                         <span class="badge">3</span>
-
                     </button>
 
-                    <a class="home-link" routerLink="" (click)="closeMenu()">
+                    <a class="home-link" (click)="closeMenu()">
                         Account
                     </a>
-                </div>
 
+                    <button type="button" class="logout-btn home-link" (click)="logout()">
+                        Logout
+                    </button>
+
+                </div>
+                }
             </div>
 
         </nav>

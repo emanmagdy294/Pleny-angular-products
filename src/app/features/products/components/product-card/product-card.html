@@ -1,0 +1,48 @@
+<div class="card">
+
+    <div class="image-container">
+        <span class="discount">
+            -{{ product().discountPercentage }}%
+        </span>
+        <img class="product-image" [src]="product().thumbnail" [alt]="product().title">
+    </div>
+
+    <div class="card-body">
+
+        <h3>{{ product().title }}</h3>
+        <p>{{ product().description }}</p>
+        <div class="price">
+            <span class="old-price">
+                {{ product().price }}
+                <span class="currency">USD</span>
+            </span>
+
+            <span class="new-price">
+                {{
+                (product().price -
+                (product().price * product().discountPercentage / 100))
+                .toFixed(2)
+                }}
+                <span class="currency">USD</span>
+            </span>
+
+        </div>
+
+        <div class="details">
+            <p>Brand: <span>{{ product().brand }}</span> </p>
+            <p>Category: <span>{{ product().category }}</span></p>
+            <p>In Stock: <span>{{ product().stock }}</span></p>
+        </div>
+
+        <div class="rating">
+            <span><img src="/images/Star.png" alt="star"></span>
+            <span class="rating-value">{{ product().rating.toFixed(2) }}</span>
+        </div>
+
+        <app-button>
+            ADD TO CART
+        </app-button>
+
+    </div>
+
+</div>
