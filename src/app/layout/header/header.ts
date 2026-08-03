@@ -1,7 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputComponent } from '../../shared/ui/input/input';
 import { AuthService } from '../../core/services/auth.service';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +12,32 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class Header {
   readonly menuOpen = signal(false);
+  readonly search = signal('');
 
+  private readonly route = inject(ActivatedRoute);
   private readonly authService = inject(AuthService);
-
   private readonly router = inject(Router);
-
+  private readonly searchSubject = new Subject<string>();
   readonly isLoggedIn = this.authService.isLoggedIn;
 
+  ngOnInit(): void {
+    this.searchSubject.pipe(debounceTime(600), distinctUntilChanged()).subscribe((value) => {
+      this.router.navigate([], {
+        relativeTo: this.route,
+
+        queryParams: {
+          page: 1,
+          search: value || null,
+        },
+
+        queryParamsHandling: 'merge',
+      });
+    });
+
+    this.route.queryParams.subscribe((params) => {
+      this.search.set(params['search'] || '');
+    });
+  }
   toggleMenu(): void {
     this.menuOpen.update((value) => !value);
   }
@@ -28,7 +48,10 @@ export class Header {
 
   logout(): void {
     this.authService.logout();
-
     this.router.navigate(['/login']);
+  }
+
+  onSearch(value: string): void {
+    this.searchSubject.next(value);
   }
 }

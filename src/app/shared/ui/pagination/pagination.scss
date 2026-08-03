@@ -1,0 +1,42 @@
+.commonColor {
+    border-color: var(--color-bg);
+    background-color: var(--color-bg);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-block: 40px;
+}
+
+button {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 1);
+    color: rgba(30, 30, 30, 1);
+    cursor: pointer;
+    transition: .2s;
+    border: 1px solid rgba(246, 246, 246, 1);
+
+    &:hover:not(:disabled) {
+        @extend .commonColor;
+    }
+
+    &:disabled {
+        opacity: .4;
+        cursor: not-allowed;
+    }
+}
+
+.page.active {
+    color: var(--color-white);
+    @extend .commonColor;
+}
+
+.dots {
+    text-align: center;
+    @extend button
+}

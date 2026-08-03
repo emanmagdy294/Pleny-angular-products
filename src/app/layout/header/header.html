@@ -20,7 +20,7 @@
                 @if (isLoggedIn()) {
                 <div class="right-section">
 
-                    <app-input placeholder="Search">
+                    <app-input placeholder="Search" [(value)]="search" (valueChanged)="onSearch($event)">
                         <img startIcon src="/images/search.png" alt="Search">
                     </app-input>
 

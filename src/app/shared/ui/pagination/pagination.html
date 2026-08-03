@@ -1,0 +1,26 @@
+<div class="pagination">
+
+    <button type="button" (click)="previous()" [disabled]="currentPage() === 1">
+        &#8249;
+    </button>
+
+    @for (item of pages(); track $index) {
+
+    @if (item.disabled) {
+
+    <span class="dots">
+        ...
+    </span>
+
+    } @else {
+    <button type="button" class="page" [class.active]="item.active" (click)="goToPage(item)">
+        {{ item.label }}
+    </button>
+    }
+    }
+
+    <button type="button" (click)="next()" [disabled]="currentPage() === totalPages()">
+        &#8250;
+    </button>
+
+</div>
