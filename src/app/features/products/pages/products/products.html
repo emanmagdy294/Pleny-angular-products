@@ -1,5 +1,5 @@
 <section class="products-page main-space">
-    
+
     <!-- <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora aut, ducimus, in amet doloremque est cupiditate ad recusandae rem fugit vero quia, voluptatem reprehenderit neque. Sapiente ex natus aut nostrum.</div> -->
     <div class="data-content">
         <app-breadcrumb [items]="
@@ -43,7 +43,21 @@
 
         </div>
 
+
+
+        <!-- Defer loading of the pagination component until the browser becomes idle
+        to improve the initial page load performance. -->
+
+
+        @defer (on idle) {
+
         <app-pagination [currentPage]="currentPage()" [totalPages]="totalPages()" (pageChange)="changePage($event)">
         </app-pagination>
+
+        } @placeholder {
+
+        <p>Loading...</p>
+
+        }
     </div>
 </section>

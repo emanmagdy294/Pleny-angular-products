@@ -5,6 +5,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { CartService } from '../../core/services/cart.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -21,9 +22,18 @@ export class Header {
   private readonly router = inject(Router);
   private readonly searchSubject = new Subject<string>();
   readonly isLoggedIn = this.authService.isLoggedIn;
+
   private readonly cartService = inject(CartService);
   readonly cartCount = this.cartService.cartCount;
+
   private readonly destroyRef = inject(DestroyRef);
+  
+  private readonly themeService = inject(ThemeService);
+  readonly isDark = this.themeService.isDark;
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
 
   ngOnInit(): void {
     this.searchSubject

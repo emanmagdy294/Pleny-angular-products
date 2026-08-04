@@ -7,6 +7,16 @@
                 <img src="/images/Logomark.png" alt="ClickTik Logo">
                 <span>ClickTik</span>
             </a>
+            
+            <button class="theme-btn" type="button" (click)="toggleTheme()">
+
+                @if(isDark()){
+                ☀️
+                } @else {
+                🌙
+                }
+            </button>
+
             @if (isLoggedIn()) {
             <a class="home-link" routerLink="/products">
                 Products
@@ -38,7 +48,7 @@
             </div>
 
         </nav>
-        
+
         @if (isLoggedIn()) {
         <button type="button" class="menu-btn" (click)="toggleMenu()" aria-label="Toggle menu">
             ☰

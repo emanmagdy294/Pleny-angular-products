@@ -28,10 +28,38 @@ body {
 
 }
 
+// dark mode
+body.dark-theme {
+  --color-surface: #969494;
+  --color-main: #FFFFFF;
+  --color-text-secondary: #D0D0D0;
+  --color-border: #3D3D3D;
+  --color-bg: #FFB800;
+  background: #121212;
+  color: white;
+
+  a,
+  label {
+    color: white;
+  }
+
+  .card {
+    background-color: #121212;
+  }
+
+}
+
+.theme-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+}
+
 .main-space {
   width: 100%;
   margin-inline: auto;
-  
+
   @media (min-width: 576px) {
     max-width: 540px;
   }
