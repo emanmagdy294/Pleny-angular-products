@@ -119,6 +119,3 @@ With more time I would add:
 - Unit Tests using Vitest
 - NgRx SignalStore
 - Optimistic Cart Updates
-
-
-## Author
