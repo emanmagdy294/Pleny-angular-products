@@ -1,36 +1,49 @@
 <section class="products-page main-space">
+    
+    <!-- <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora aut, ducimus, in amet doloremque est cupiditate ad recusandae rem fugit vero quia, voluptatem reprehenderit neque. Sapiente ex natus aut nostrum.</div> -->
+    <div class="data-content">
+        <app-breadcrumb [items]="
+    category()
+      ? ['Home', 'Products', category()]
+      : ['Home', 'Products']
+    ">
+        </app-breadcrumb>
 
-    <app-breadcrumb></app-breadcrumb>
+        <div class="content">
 
-    <div class="content">
-
-        <app-products-sidebar></app-products-sidebar>
-
-        <div class="products-grid">
-
-            @if (loading()) {
-            <p>Loading...</p>
-            }
-
-            @else if (errorMessage()) {
-            <p>{{ errorMessage() }}</p>
-            }
-
-            @else {
+            <app-products-sidebar [categories]="categories()" (selectedCategory)="filterByCategory($event)">
+            </app-products-sidebar>
 
             <div class="products-grid">
-                @for (product of products(); track product.id) {
 
-                <app-product-card [product]="product">
-                </app-product-card>
+                @if (loading()) {
+                <p>Loading...</p>
+                }
+
+                @else if (errorMessage()) {
+                <p>{{ errorMessage() }}</p>
+                }
+
+                @else {
+                <div>
+                    <p class="total">({{ total() }}) Products Found</p>
+
+                    <div class="products-grid">
+                        @for (product of products(); track product.id) {
+
+                        <app-product-card [product]="product">
+                        </app-product-card>
+                        }
+                    </div>
+
+                </div>
+
                 }
             </div>
 
-            }
         </div>
 
+        <app-pagination [currentPage]="currentPage()" [totalPages]="totalPages()" (pageChange)="changePage($event)">
+        </app-pagination>
     </div>
-
-    <app-pagination [currentPage]="currentPage()" [totalPages]="totalPages()" (pageChange)="changePage($event)">
-    </app-pagination>
 </section>

@@ -39,9 +39,19 @@
             <span class="rating-value">{{ product().rating.toFixed(2) }}</span>
         </div>
 
-        <app-button>
+        @if (!isAdded()) {
+
+        <app-button (click)="addToCart()">
             ADD TO CART
         </app-button>
+
+        } @else {
+
+        <button class="added-btn" disabled>
+            ADDED
+        </button>
+
+        }
 
     </div>
 

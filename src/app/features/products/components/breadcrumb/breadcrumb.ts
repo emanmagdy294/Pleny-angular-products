@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './breadcrumb.html',
   styleUrl: './breadcrumb.scss',
 })
-export class Breadcrumb {}
+export class Breadcrumb {
+    readonly items = input.required<string[]>();
+}

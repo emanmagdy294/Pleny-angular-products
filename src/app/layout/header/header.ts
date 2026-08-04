@@ -1,8 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputComponent } from '../../shared/ui/input/input';
 import { AuthService } from '../../core/services/auth.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { CartService } from '../../core/services/cart.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-header',
@@ -19,22 +21,28 @@ export class Header {
   private readonly router = inject(Router);
   private readonly searchSubject = new Subject<string>();
   readonly isLoggedIn = this.authService.isLoggedIn;
+  private readonly cartService = inject(CartService);
+  readonly cartCount = this.cartService.cartCount;
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.searchSubject.pipe(debounceTime(600), distinctUntilChanged()).subscribe((value) => {
-      this.router.navigate([], {
-        relativeTo: this.route,
+    this.searchSubject
+      .pipe(debounceTime(600), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
+      .subscribe((value) => {
+        this.router.navigate([], {
+          relativeTo: this.route,
 
-        queryParams: {
-          page: 1,
-          search: value || null,
-        },
+          queryParams: {
+            page: 1,
+            search: value || null,
+            category: null,
+          },
 
-        queryParamsHandling: 'merge',
+          queryParamsHandling: 'merge',
+        });
       });
-    });
 
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       this.search.set(params['search'] || '');
     });
   }

@@ -1,9 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-products-sidebar',
-  imports: [],
+  standalone: true,
   templateUrl: './products-sidebar.html',
-  styleUrl: './products-sidebar.scss',
+  styleUrl: './products-sidebar.scss'
 })
-export class ProductsSidebar {}
+export class ProductsSidebar {
+
+  categories = input<string[]>([]);
+
+  selectedCategory = output<string>();
+
+
+  selectCategory(category: string) {
+    this.selectedCategory.emit(category);
+  }
+
+}

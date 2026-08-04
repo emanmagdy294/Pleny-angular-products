@@ -26,12 +26,8 @@
 
                     <button class="cart-btn" (click)="closeMenu()">
                         <img src="/images/cart.png" alt="cart">
-                        <span class="badge">3</span>
+                        <span class="badge">{{ cartCount() }}</span>
                     </button>
-
-                    <a class="home-link" (click)="closeMenu()">
-                        Account
-                    </a>
 
                     <button type="button" class="logout-btn home-link" (click)="logout()">
                         Logout
@@ -42,10 +38,11 @@
             </div>
 
         </nav>
-
+        
+        @if (isLoggedIn()) {
         <button type="button" class="menu-btn" (click)="toggleMenu()" aria-label="Toggle menu">
             ☰
         </button>
-
+        }
     </div>
 </header>

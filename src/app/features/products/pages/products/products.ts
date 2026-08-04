@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, catchError, debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { PaginationComponent } from '../../../../shared/ui/pagination/pagination
 
 import { ProductsService } from '../../../../core/services/products.service';
 import { Product } from '../../../../core/models/products/product';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-products',
@@ -29,6 +30,10 @@ export class Products {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly productsService = inject(ProductsService);
+  categories = signal<string[]>([]);
+  private productService = inject(ProductsService);
+  readonly category = signal('');
+  private readonly destroyRef = inject(DestroyRef);
 
   private readonly searchSubject = new Subject<{
     page: number;
@@ -37,6 +42,10 @@ export class Products {
   }>();
 
   ngOnInit(): void {
+    this.productService.getCategories().subscribe((res) => {
+      this.categories.set(res);
+    });
+
     this.searchSubject
       .pipe(
         distinctUntilChanged(
@@ -64,19 +73,21 @@ export class Products {
           });
         }),
       )
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((response) => {
         this.products.set(response.products);
         this.total.set(response.total);
         this.loading.set(false);
       });
 
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const page = Number(params['page']) || 1;
       const search = params['search'] || '';
       const category = params['category'] || '';
 
       this.currentPage.set(page);
       this.search.set(search);
+      this.category.set(category);
 
       this.searchSubject.next({
         page,
@@ -91,6 +102,18 @@ export class Products {
       queryParams: {
         page,
         search: this.search() || null,
+      },
+
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  filterByCategory(category: string): void {
+    this.router.navigate([], {
+      queryParams: {
+        page: 1,
+        category: category === 'all' ? null : category,
+        search: null,
       },
 
       queryParamsHandling: 'merge',

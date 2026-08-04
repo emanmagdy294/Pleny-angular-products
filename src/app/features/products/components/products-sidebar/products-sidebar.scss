@@ -1,0 +1,75 @@
+.sidebar {
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding-block: 5px;
+    padding-inline: 19px;
+    font-size: 12px;
+    margin-top: 30px;
+
+    h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    span {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .category-item {
+
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        margin-bottom: 8px;
+        cursor: pointer;
+
+        color: #555;
+
+
+        input {
+
+            appearance: none;
+
+            width: 12px;
+            height: 12px;
+
+            border: 1px solid #36c9c9;
+            border-radius: 50%;
+
+            position: relative;
+
+
+            &:checked::after {
+
+                content: "";
+
+                width: 6px;
+                height: 6px;
+
+                background: #36c9c9;
+
+                border-radius: 50%;
+
+                position: absolute;
+
+                top: 2px;
+                left: 2px;
+
+            }
+
+        }
+
+    }
+
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: 60%;
+        margin: auto;
+    }
+}

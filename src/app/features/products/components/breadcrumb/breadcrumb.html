@@ -1,12 +1,14 @@
-<section class="breadcrumb">
+<div class="breadcrumb">
 
-    <h1>iPhone</h1>
+    @for(item of items(); track item; let last = $last){
 
-    <p>
-        Home /
-        Products /
-        Smart Phones /
-        <strong>iPhone</strong>
-    </p>
+    <span>{{ item }}</span>
 
-</section>
+    @if(!last){
+
+    <span class="separator"> / </span>
+
+    }
+    }
+
+</div>

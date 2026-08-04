@@ -63,13 +63,15 @@
 }
 
 .right-section {
+    color: black;
     gap: 24px;
+    font-weight: bolder;
     flex-wrap: wrap;
     @extend .common-flex;
 }
 
 .search {
-    width: 319;
+    width: 319px;
     height: 32px;
     gap: 8px;
     padding-inline: 12px;
@@ -144,6 +146,11 @@
 
     }
 
+    .nav .container {
+        width: 100%;
+        max-width: 100%;
+        padding-inline: 0;
+    }
 }
 
 .logout-btn {

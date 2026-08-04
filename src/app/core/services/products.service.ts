@@ -26,4 +26,8 @@ export class ProductsService {
     const separator = url.includes('?') ? '&' : '?';
     return this.http.get<ProductsResponse>(`${url}${separator}limit=${limit}&skip=${skip}`);
   }
+
+  getCategories() {
+    return this.http.get<string[]>(`${environment.apiUrl}/products/category-list`);
+  }
 }
