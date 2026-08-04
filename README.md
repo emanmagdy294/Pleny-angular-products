@@ -1,59 +1,124 @@
-# TaskApp
+# ClickTik Store
+Angular 21 application developed for the Pleny Frontend Technical Assessment.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
+---
 
-## Development server
+## Live Demo
+https://pleny-angular-products.vercel.app/
 
-To start a local development server, run:
+---
 
-```bash
+## Tech Stack
+
+- Angular 21
+- Standalone Components
+- Signals
+- Zoneless Change Detection
+- SCSS
+- RxJS
+- Functional HTTP Interceptors
+- Functional Route Guards
+
+---
+
+## Features
+
+- User Authentication
+- Protected Products Page
+- Product Search (debounced using RxJS)
+- Category Filtering
+- Products Pagination
+- Add Products to Cart
+- Cart Counter
+- Automatic Access Token Refresh
+- Dark Mode
+- Lazy Loaded Routes
+- Responsive Design
+- Reusable Shared UI Components
+
+---
+
+## Run the Project
+
+Install dependencies:
+npm install
+
+Run the development server:
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The application will be available at:
 
-## Code scaffolding
+http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Project Structure
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The project follows a feature-based architecture.
 
-```bash
-ng generate --help
-```
+src/
+ ─ core/
+ ─ features/
+ ─ shared/
 
-## Building
+### core
 
-To build the project run:
+Contains:
 
-```bash
-ng build
-```
+- Services
+- Guards
+- HTTP Interceptors
+- Models
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### features
 
-## Running unit tests
+Contains all feature pages and feature-specific components.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### shared
 
-```bash
-ng test
-```
+Contains reusable UI components such as:
 
-## Running end-to-end tests
+- Button
+- Input
+- Product Card
+- Pagination
+- Sidebar
+- Breadcrumb
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## State Management
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+This application follows a **Signals-first** approach as recommended in Angular 21.
 
-## Additional Resources
+It uses:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- `signal()` for local component state.
+- `computed()` for derived state.
+- RxJS only for asynchronous streams such as debounced product search.
+
+NgRx SignalStore was not implemented because it is listed as a bonus requirement and Signals were sufficient for the current application size.
+
+---
+
+## Notes
+
+- Route query parameters are the source of truth for search, pagination and category filtering.
+- Authentication is handled using a functional HTTP interceptor and a functional route guard.
+- Access tokens are automatically refreshed using the Refresh Token endpoint.
+- The application uses zoneless change detection with `provideZonelessChangeDetection()`.
+
+---
+
+## Future Improvements
+
+With more time I would add:
+
+- Loading Skeleton components
+- Better Empty State UI
+- Unit Tests using Vitest
+- NgRx SignalStore
+- Optimistic Cart Updates
+
+
+## Author
