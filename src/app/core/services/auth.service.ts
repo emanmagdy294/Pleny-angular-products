@@ -8,7 +8,6 @@ import { environment } from '../models/environment';
   providedIn: 'root',
 })
 export class AuthService {
-
   private readonly http = inject(HttpClient);
 
   readonly isLoggedIn = signal(
@@ -32,13 +31,25 @@ export class AuthService {
     );
   }
 
-  logout(): void {
+  saveTokens(response: LoginResponse): void {
+    localStorage.setItem('accessToken', response.accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
 
+    this.isLoggedIn.set(true);
+  }
+
+  getAccessToken(): string | null {
+    return localStorage.getItem('accessToken');
+  }
+
+  getRefreshToken(): string | null {
+    return localStorage.getItem('refreshToken');
+  }
+
+  logout(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
 
     this.isLoggedIn.set(false);
-
   }
-
 }

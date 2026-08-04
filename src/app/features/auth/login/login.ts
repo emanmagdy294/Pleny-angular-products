@@ -32,9 +32,7 @@ export class Login {
       .subscribe({
         next: (response) => {
           this.errorMessage.set('');
-          localStorage.setItem('accessToken', response.accessToken);
-          localStorage.setItem('refreshToken', response.refreshToken);
-          this.authService.isLoggedIn.set(true);
+          this.authService.saveTokens(response);
           this.router.navigate(['/products']);
         },
 
